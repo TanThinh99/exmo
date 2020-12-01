@@ -1,0 +1,114 @@
+{% extends 'user/layout/base.html' %}
+
+{% block title %}Sản phẩm shop{% endblock %}
+
+{% load static %}
+
+{% block content %}
+    <!-- Breadcrumb Section Begin -->
+    <div class="breacrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text product-more">
+                        <a href="index.php"><i class="fa fa-home"></i> Trang chủ</a>
+                        <a href="shop.php">Cửa hàng</a>
+                        <span>Chi tiết sản phẩm</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb Section Begin -->
+
+    <!-- Product Shop Section Begin -->
+    <section class="product-shop spad page-details">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                <div class="filter-widget">
+                        <h4 class="fw-title">Thể loại</h4>
+                        <ul class="filter-catagories">
+                            <li><a href="#">Bao da - Ốp lưng</a></li>
+                            <li><a href="#">Pin dự phòng</a></li>
+                            <li><a href="#">Cáp - Sạc</a></li>
+                            <li><a href="#">Tai nghe</a></li>
+                        </ul>
+                    </div>
+                    <div class="filter-widget">
+                        <h4 class="fw-title">Phổ biến</h4>
+                        <div class="fw-tags">
+                            <a href="#">Sạc Type-C</a>
+                            <a href="#">Cáp sạc</a>
+                            <a href="#">Pin dự phòng Apple</a>
+                            <a href="#">Tai nghe bluetooth</a>
+                            <a href="#">Ốp Note 10</a>
+                            <a href="#">Sạc J7</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="row">
+                       
+                                    <div class="col-lg-6">
+                                        <div class="" >
+                                            <img class="product-big-img"style="width:400px; height:400px;" src="img/baoda1.jpg" alt="">
+                                                <div class="zoom-icon">
+                                                    
+                                                    </div>
+                                        </div>
+                                        <div class="product-thumbs">
+                                            <div class="product-thumbs-track ps-slider owl-carousel">        
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="product-details">
+                                            <div class="pd-title">
+                                                <span>Ốp lưng</span>
+                                                <h3>Ốp lưng Spigen Ultra Hybrid Iphone 12</h3>
+                                                <a href="#" class="heart-icon"><i class="icon_heart_alt"></i></a>
+                                            </div>
+                                            <div class="pd-rating">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <span>(5)</span>
+                                            </div>
+                                            <div class="pd-desc">
+                                                <p>Nếu bạn đang muốn tìm cho mình một chiếc ốp lưng vừa giữ lại vẻ ngoài sang trọng cho iPhone 12 Pro Max vừa bảo vệ cho điện thoại khi sử dụng. 
+                                                Ốp lưng Spigen Liquid Crystal Cho iPhone 12 Pro Max sẽ là một sự lựa chọn không thể bỏ qua dành cho bạn khi đáp ứng đủ các yếu tố này.</p>
+                                                <h4> 540.000 vnd</h4>
+                                            </div>
+                                            <div class="quantity">
+                                                <form action="#" method="post"> 
+                                                    <div class="pro-qty">
+                                                        <input type="text" value="1" name="soluong" >
+                                                    </div>
+                                                    <button type="submit"style="border: none;"name="smit" class="primary-btn pd-cart" >Thêm giỏ hàng</button>
+                                                </form>    
+                                            </div>
+                                            <ul class="pd-tags">
+                                                <li><span>Thể loại</span>: Ốp lưng cao cấp</li>
+                                            </ul>
+                                            <div class="pd-share">
+                                                <div class="p-code">Mã : OL-01</div></br>
+                                                <div class="p-code">Số lượng còn lại :<span id="soluongconlai">10</span></div>
+                                                <div class="pd-social">
+                                                    <a href="#"><i class="ti-facebook"></i></a>
+                                                    <a href="#"><i class="ti-twitter-alt"></i></a>
+                                                    <a href="#"><i class="ti-linkedin"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>    
+                         
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Shop Section End -->
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends 'user/layout/base.html' %}
+
+{% block title %}Giỏ hàng{% endblock %}
+
+{% load static %}
+
+{% block content %}
+    <!-- Breadcrumb Section Begin -->
+    <div class="breacrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text product-more">
+                        <a href="index.php"><i class="fa fa-home"></i> Trang chủ</a>
+                        <a href="shop.php">Cửa hàng</a>
+                        <span>Giỏ hàng</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb Section Begin -->
+
+    <!-- Shopping Cart Section Begin -->
+    <section class="shopping-cart spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="cart-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Ảnh sản phẩm</th>
+                                    <th class="p-name" style="padding-left: 60px;">Tên sản phẩm</th>
+                                    <th>Số lượng</th>
+                                    <th>Giá</th>
+                                    <th>Thanh Toán</th>
+                                    <th><i class="ti-close"></i></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              
+                                    
+                                            <form action="#" method="post">
+                                                <tr>
+                                                    <td style="width: 60px;" class="qua-col first-row">
+                                                        <input style="width: 40px; border:none; text-align:center;"type="text" name="dem" value=""readonly>
+                                                    </td>
+                                                    <td class="cart-pic first-row"><img style="width: 100px; height: 100px;" src="img/baoda1.jpg" alt=""></td>
+                                                    <td class="cart-title first-row" style="padding-left: 60px;">
+                                                        <h5>Ốp lưng Spigen Ultra Hybrid Iphone 12</h5>
+                                                    </td>
+                                                    <td style="width: 60px;" class="qua-col first-row">
+                                                        <input style="width: 40px; border:none; text-align:center;"type="text" value="2"readonly>
+                                                    </td>
+                                                    <td class="p-price first-row"> 540.000 vnd</td>
+                                                    <td class="total-price first-row"> 540.000 vnd</td>
+                                                    <td class=""><button type="submit"style="border: none; margin-top: 1.4rem;"name="smit" class="ti-close"></button></td>
+                                                </tr>
+                                            </form>
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="cart-buttons">
+                                <a href="./shop.php" class="primary-btn continue-shop">Mua thêm</a>
+                            </div>
+                        </div>
+                     
+                        <div class="col-lg-4 offset-lg-4">
+                            <div class="proceed-checkout">
+                                <ul>
+                                    <li class="subtotal">Tổng thanh toán <span> 1.080.000 vnd</span></li>
+                                    <!-- <li class="cart-total">Thanh toán <span>380.000 vnd</span></li> -->
+                                </ul>     
+                                            <form action="#" method="post">
+                                                <button name="smittotal" type="submit" class="proceed-btn">Thanh toán</button>
+                                            </form>
+                            </div>
+                        </div>';
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Shopping Cart Section End -->
+{% endblock %}

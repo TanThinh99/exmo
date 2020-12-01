@@ -1,0 +1,131 @@
+{% load static %}
+
+<!-- Header Section Begin -->
+<header class="header-section">
+    <div class="header-top">
+        <div class="container">
+            <div class="ht-left">
+                <div class="mail-service">
+                    <i class=" fa fa-envelope"></i>
+                    EXMO@gmail.com
+                </div>
+                <div class="phone-service">
+                    <i class=" fa fa-phone"></i>
+                    +123456789
+                </div>
+            </div>
+            <div class="ht-right">
+                
+                        <a href="./login.php" class="login-panel"><i class="fa fa-user"></i>Đăng nhập</a>
+                    
+                <div class="lan-selector">
+                    <select class="language_drop" name="countries" id="countries" style="width:300px;">
+                        <option value='yt' data-image="{% static 'img/flag/flag-1.png' %}" data-imagecss="flag yt"
+                            data-title="VietNam">VN</option>
+                        <option value='yu' data-image="{% static 'img/flag-1.jpg' %}" data-imagecss="flag yu"
+                            data-title="English">Eng</option>
+                    </select>
+                </div>
+                <div class="top-social">
+                    <a href="#"><i class="ti-facebook"></i></a>
+                    <a href="#"><i class="ti-twitter-alt"></i></a>
+                    <a href="#"><i class="ti-linkedin"></i></a>
+                    <a href="#"><i class="ti-pinterest"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="inner-header">
+            <div class="row">
+                <div class="col-lg-2 col-md-2">
+                    <div class="logo">
+                        <a href="./index.php">
+                            <h2 style="color: black; font-weight: Bold;">EXMO</h2>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-7 col-lg-7">
+                    <div class="advanced-search">
+                        <button type="button" class="category-btn">Tìm kiếm</button>
+                        <form action="shop.php" class="input-group" method="get">
+                            <input type="text" name="search" placeholder="Bạn muốn tìm?">
+                            <button type="submitsearch" name="submit"> <i class="ti-search"></i></button>
+                        </form>
+                    </div>
+                </div>
+                
+                    <div class="col-lg-3 text-right col-lg-3">
+                        <ul class="nav-right">
+                                    <span><b>Giỏ hàng</b></span>
+                            <li class="cart-icon"><a href="shopping-cart.php">
+                                    <i class="icon_cart_alt"></i>
+                                    <span>2</span>
+                                    <div class="cart-hover">
+                                    <div class="select-items">
+                                    
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="si-pic"><img style="width:100px; height:100px;" src="{% static 'img/baoda.jpg' %}" alt=""></td>
+                                                    <td class="si-text">
+                                                        <div class="product-selected">
+                                                            <p>540.000 vnd x 2</p>
+                                                            <h6>Ốp lưng</h6>
+                                                        </div>
+                                                    </td>
+                                                    <td class="si-close">
+                                                        <!-- <i class="ti-close"></i>-->
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    
+                                </div>
+                                    <div class="select-total">
+                                                
+                                    <h5>Tổng Giá: 1.080.000 vnd</h5>
+                                </div>
+                                <div class="select-button">
+                            </div>
+                        </div>      
+                            </li>
+                            <li class="cart-price">1.080.000 vnd</li>
+                        </ul>
+                    </div>'
+                
+            </div>
+        </div>
+    </div>
+    <div class="nav-item">
+        <div class="container">
+            <div class="nav-depart" style="margin-left:15%;">
+                <div class="depart-btn" >
+                    <i class="ti-menu"></i>
+                    <span>Danh mục</span>
+                    <ul class="depart-hover">
+                        <li><a href="#">Bao da - Ốp lưng</a></li>
+                        <li><a href="#">Cáp - Sạc</a></li>
+                        <li><a href="#">Pin dự phòng</a></li>
+                    </ul>
+                </div>
+            </div>
+            <nav class="nav-menu mobile-menu">
+                <ul>
+                    <li><a href="./index.php">Trang chủ</a></li>
+                    <li><a href="./shop.php">Shop</a></li>
+                    <li><a href="./contact.php">Địa chỉ</a></li>
+                    <li><a href="#">Pages</a>
+                        <ul class="dropdown">
+                            <li><a href="./shopping-cart.php">Giỏ hàng</a></li>
+                            <li><a href="./register.php">Đăng ký</a></li>
+                            <li><a href="./login.php">Đăng nhập</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <div id="mobile-menu-wrap"></div>
+        </div>
+    </div>
+</header>
+<!-- Header End -->

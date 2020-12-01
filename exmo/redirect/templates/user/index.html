@@ -1,0 +1,181 @@
+{% extends 'user/layout/base.html' %}
+
+{% block title %}Trang chủ{% endblock %}
+
+{% load static %}
+
+{% block content %}
+    <!-- Banner Section Begin -->
+    <div class="banner-section spad">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="single-banner">
+                        <img  src="{% static 'img/baoda.jpg' %}" alt="">
+                        <div class="inner-text">
+                            <h4 style="background: none; color: white;">Bao da, Ốp lưng</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="single-banner">
+                        <img   src="{% static 'img/pin.jpg' %}" alt="">
+                        <div class="inner-text">
+                            <h4 style="background: none; color: white;">Pin dự phòng</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="single-banner">
+                        <img src="{% static 'img/capsac.jpg' %}" alt="">
+                        <div class="inner-text">
+                            <h4 style="background: none; color: white;">Cáp - Sạc</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Banner Section End -->
+
+    <!-- Women Banner Section Begin -->
+    <section class="women-banner spad">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="product-large set-bg" data-setbg="{% static 'img/baoda2.jpg' %}">
+                        <h2>Bao da - Ốp lưng</h2>
+                        <a href="#">Xem nhiều sản phẩm khác</a>
+                    </div>
+                </div>
+                <div class="col-lg-8 offset-lg-1">
+                    <div class="filter-control">
+                        <ul>
+                            <li class="active">Bao da - Ốp lưng cao cấp</li>
+                        </ul>
+                    </div>
+                    <div class="product-slider owl-carousel">
+                            <div class="product-item">
+                                <div class="pi-pic">
+                                    <img src="{% static 'img/baoda1.jpg' %}" alt="">
+                                    <!-- <div class="icon">
+                                        <i class="icon_heart_alt"></i>
+                                    </div> -->
+                                    <ul>
+                                        <!-- <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li> -->
+                                        <li class="quick-view"><a href="product.php">+ Xem nhanh</a></li>
+                                        <!-- <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li> -->
+                                    </ul>
+                                </div>
+                                <div class="pi-text">
+                                    <div class="catagory-name">Ốp lưng</div>
+                                    <a href="#">
+                                        <h5>Ốp lưng Spigen Ultra Hybrid Iphone 12</h5>
+                                    </a>
+                                    <div class="product-price">
+                                    540.000 vnd
+                                    </div>
+                                </div>
+                            </div>    
+                                     
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Women Banner Section End -->
+    <!-- Man Banner Section Begin -->
+    <section class="man-banner spad">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="filter-control">
+                        <ul>
+                        <ul>
+                            <li class="active">Pin dự phòng</li>
+                        </ul>
+                    </div>
+                    <div class="product-slider owl-carousel">
+                   
+                                <div class="product-item">
+                                    <div class="pi-pic">
+                                        <img style ="width:270px; height:303px;"src="{% static 'img/pindp.jpg' %}" alt="">
+                                        <div class="icon">
+                                            <i class="icon_heart_alt"></i>
+                                        </div>
+                                        <ul>
+                                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
+                                            <li class="quick-view"><a href="product.ph">+ Xem nhanh</a></li>
+                                            <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="pi-text">
+                                        <div class="catagory-name">Pin dự phòng</div>
+                                        <a href="#">
+                                            <h5>Pin dự phòng Mophie PowerStation Type C 20000Mah</h5>
+                                        </a>
+                                        <div class="product-price">
+                                        1.990.000 vnd
+                                        </div>
+                                    </div>
+                                </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 offset-lg-1">
+                    <div class="product-large set-bg m-large" data-setbg="{% static 'img/pindp1.jpg' %}">
+                        <h2>Pin dự phòng</h2>
+                        <a href="#">Xem thêm nhiều sản phẩm khác</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Man Banner Section End -->
+    <!-- kids Banner Section Begin -->
+    <section class="women-banner spad">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="product-large set-bg" data-setbg="{% static 'img/capsac1.jpg' %}">
+                        <h2>Cáp sạc</h2>
+                        <a href="">Xem nhiều sản phẩm khác</a>
+                    </div>
+                </div>
+                <div class="col-lg-8 offset-lg-1">
+                    <div class="filter-control">
+                        <ul>
+                            <li class="active">Cáp - Sạc cao cấp</li>
+                        </ul>
+                    </div>
+                    <div class="product-slider owl-carousel">
+                       
+                            <div class="product-item">
+                                <div class="pi-pic">
+                                    <img src="{% static 'img/capsac2.jpg' %}" alt="">
+                                    <div class="icon">
+                                        <i class="icon_heart_alt"></i>
+                                    </div>
+                                    <ul>
+                                        <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
+                                        <li class="quick-view"><a href="product.php">+ Xem nhanh</a></li>
+                                        <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="pi-text">
+                                    <div class="catagory-name">Cáp - Sạc</div>
+                                    <a href="#">
+                                        <h5>Sạc Xiaomi ZMI 2 cổng USB Type-C 30W HA722 + Cáp C to C 1m</h5>
+                                    </a>
+                                    <div class="product-price">
+                                    390.000 vnd
+                                    </div>
+                                </div>
+                            </div>
+                   
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- kids Banner Section End -->
+{% endblock %}
