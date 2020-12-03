@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from NhomHangHoa.serializers import NhomHangHoaSerializer
 from NhomHangHoa.models import Nhomhanghoa
@@ -6,47 +6,114 @@ from NhomHangHoa.models import Nhomhanghoa
 from HangHoa.serializers import HangHoaSerializer
 from HangHoa.models import Hanghoa
 
+from TaiKhoan.models import Taikhoan
+
 # Create your views here.
 
 def Index(request):
-    nhomHangHoa = Nhomhanghoa.objects.all()
-    nhomHangHoaArr = NhomHangHoaSerializer(nhomHangHoa, many=True)
+    name = ''
+    try:
+        username = request.session['username']
+        user = Taikhoan.objects.get(username=username)
+        name = user.hoten
+    except KeyError:
+        pass
 
-    hangHoa = Hanghoa.objects.all()
-    hangHoaArr = HangHoaSerializer(hangHoa, many=True)
-    return render(request, 'user/index.html', {'nhomHangHoaArr': nhomHangHoaArr.data, 'hangHoaArr': hangHoaArr.data})
+    nhomHangHoaArr = Nhomhanghoa.objects.all()
+    hangHoaArr = Hanghoa.objects.all()
+    data = {
+        'nhomHangHoaArr': nhomHangHoaArr, 
+        'hangHoaArr': hangHoaArr,
+        'nameOfUser': name
+    }
+    return render(request, 'user/index.html', data)
 
 
 def Contact(request):
-    return render(request, 'user/Contact.html')
+    name = ''
+    try:
+        username = request.session['username']
+        user = Taikhoan.objects.get(username=username)
+        name = user.hoten
+    except KeyError:
+        pass
+    data = {
+        'nameOfUser': name
+    }
+    return render(request, 'user/Contact.html', data)
 
 
 def Login(request):
-    return render(request, 'user/login.html')
+    data = {
+        'nameOfUser': ''
+    }
+    return render(request, 'user/login.html', data)
+
+
+def Register(request):
+    data = {
+        'nameOfUser': ''
+    }
+    return render(request, 'user/register.html', data)
+
+
+def Logout(request):
+    try:
+        username = request.session['username']
+        del request.session['username']
+        del request.session['access']
+    except KeyError:
+        pass
+    return redirect('http://localhost:8000/')
 
 
 def Product(request, product_key):
+    name = ''
+    try:
+        username = request.session['username']
+        user = Taikhoan.objects.get(username=username)
+        name = user.hoten
+    except KeyError:
+        pass
+
     hangHoa = Hanghoa.objects.get(pk=product_key)
     nhomHangHoa = Nhomhanghoa.objects.get(pk=hangHoa.manhom.manhom)
     nhomHangHoaArr = Nhomhanghoa.objects.all()
     data = {
         'hangHoa': hangHoa,
         'nhomHangHoa': nhomHangHoa,
-        'nhomHangHoaArr': nhomHangHoaArr
+        'nhomHangHoaArr': nhomHangHoaArr,
+        'nameOfUser': name
     }
     return render(request, 'user/product.html', data)
 
 
-def Register(request):
-    return render(request, 'user/register.html')
-
-
 def Shop(request):
-    return render(request, 'user/shop.html')
+    name = ''
+    try:
+        username = request.session['username']
+        user = Taikhoan.objects.get(username=username)
+        name = user.hoten
+    except KeyError:
+        pass
+    data = {
+        'nameOfUser': name
+    }
+    return render(request, 'user/shop.html', data)
 
 
 def ShoppingCart(request):
-    return render(request, 'user/shopping-cart.html')
+    name = ''
+    try:
+        username = request.session['username']
+        user = Taikhoan.objects.get(username=username)
+        name = user.hoten
+    except KeyError:
+        pass
+    data = {
+        'nameOfUser': name
+    }
+    return render(request, 'user/shopping-cart.html', data)
 
 
 def SaveAccess(request):

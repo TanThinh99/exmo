@@ -15,9 +15,11 @@
                 </div>
             </div>
             <div class="ht-right">
-                
-                        <a href="{% url 'redirect:Login' %}" class="login-panel"><i class="fa fa-user"></i>Đăng nhập</a>
-                    
+                {% if nameOfUser == '' %}
+                    <a href="{% url 'redirect:Login' %}" class="login-panel"><i class="fa fa-user"></i>Đăng nhập</a>
+                {% else %}
+                    <a class="login-panel"><i class="fa fa-user"></i>{{ nameOfUser }}</a>
+                {% endif %}      
                 <div class="lan-selector">
                     <select class="language_drop" name="countries" id="countries" style="width:300px;">
                         <option value='yt' data-image="{% static 'img/flag/flag-1.png' %}" data-imagecss="flag yt"
@@ -118,9 +120,12 @@
                     <li><a href="#">Pages</a>
                         <ul class="dropdown">
                             <li><a href="{% url 'redirect:ShoppingCart' %}">Giỏ hàng</a></li>
-                            <li><a href="{% url 'redirect:Register' %}">Đăng ký</a></li>
-                            <li><a href="{% url 'redirect:Login' %}">Đăng nhập</a></li>
-                            <li><a href="{% url 'redirect:Login' %}">Đăng xuất</a></li>
+                            {% if nameOfUser == '' %}
+                                <li><a href="{% url 'redirect:Register' %}">Đăng ký</a></li>
+                                <li><a href="{% url 'redirect:Login' %}">Đăng nhập</a></li>
+                            {% else %}
+                                <li><a href="{% url 'redirect:Logout' %}">Đăng xuất</a></li>
+                            {% endif %}
                         </ul>
                     </li>
                 </ul>

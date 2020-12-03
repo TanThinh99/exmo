@@ -32,14 +32,15 @@ document.getElementById('submitBtn').onclick = function() {
             }
         })
         .then(function(response) {
-            alert('dang nhap thanh cong');
             $.get('saveAccess', {
                 'username': username,
                 'access': response.data.access                
-            }, function(data){});
+            }, function(data) {
+                window.location.href = 'http://localhost:8000/';
+            });            
         })
         .catch(function(error) {
-            alert('Dang nhap that bai');
+            alert('Đăng nhập thất bại');
             console.log(error);
         });
     }

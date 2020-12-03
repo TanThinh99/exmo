@@ -27,22 +27,26 @@
                 <div class="col-lg-6 offset-lg-3">
                     <div class="register-form">
                         <h2>Đăng ký tài khoản</h2>
-                        <form action="register.php" method="post">
+                        <form>
                             <div class="group-input">
-                                <label for="username">Nhập tài khoản:</label>
+                                <label for="username">Nhập tài khoản *:</label>
                                 <input type="text" id="username" name="username">
+                                <p id="usernameError" style="display:none; color:red;">Tài khoản không được trống</p>
                             </div>
                             <div class="group-input">
-                                <label for="pass">Nhập họ tên:</label>
+                                <label for="pass">Nhập họ tên *:</label>
                                 <input type="text" id="name" name="name">
+                                <p id="nameError" style="display:none; color:red;">Họ tên không được trống</p>
                             </div>
                             <div class="group-input">
                                 <label for="pass">Nhập mật khẩu *:</label>
                                 <input type="password" id="password" name="password">
+                                <p id="passwordError" style="display:none; color:red;">Mật khẩu không được trống</p>
                             </div>
                             <div class="group-input">
                                 <label for="con-pass">Nhập lại mật khẩu *:</label>
                                 <input type="password" id="con-pass" name="con-pass">
+                                <p id="passwordError2" style="display:none; color:red;">Mật khẩu nhập lại không trùng khớp</p>
                             </div>
                             <div class="group-input">
                                 <label for="con-pass">Địa chỉ:</label>
@@ -52,7 +56,7 @@
                                 <label for="con-pass">Số điện thoại:</label>
                                 <input type="text" id="phone" name="phone">
                             </div>
-                            <button name="submit" type="submit" class="site-btn register-btn">Đăng ký</button>
+                            <button name="submit" type="button" id="submitBtn" class="site-btn register-btn">Đăng ký</button>
                         </form>
                         <div class="switch-login">
                             <a href="{% url 'redirect:Login' %}" class="or-login">Hoặc Đăng nhập</a>
@@ -63,4 +67,9 @@
         </div>
     </div>
     <!-- Register Form Section End -->
+{% endblock %}
+
+{% block script %}
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="{% static 'user/js/register.js' %}"></script>
 {% endblock %}

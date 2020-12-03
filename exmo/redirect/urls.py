@@ -7,8 +7,11 @@ app_name = 'redirect'
 urlpatterns = [
     path('', views.Index, name='Index'),
     path('contact', views.Contact, name='Contact'),
+
     path('login', views.Login, name='Login'),
     path('register', views.Register, name='Register'),
+    path('logout', views.Logout, name='Logout'),
+    
     path('product/<int:product_key>', views.Product, name='Product'),
     path('shop', views.Shop, name='Shop'),
     path('shoppingCart', views.ShoppingCart, name='ShoppingCart'),
