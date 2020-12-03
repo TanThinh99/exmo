@@ -32,18 +32,12 @@
     </div>
 
     <!-- Header Section Begin -->
-    <!-- <?php
-    include 'code_include/head_nav.php';
-    ?> -->
     {% include 'user/layout/head_nav.html' %}
     <!-- Header End --> 
 
     {% block content %}{% endblock %}
 
     <!-- Footer Section Begin -->
-    <!-- <?php
-    include 'code_include/footer.php';
-    ?> -->
     {% include 'user/layout/footer.html' %}
     <!-- Footer Section End -->
 
@@ -58,6 +52,8 @@
     <script src="{% static 'js/jquery.slicknav.js' %}"></script>
     <script src="{% static 'js/owl.carousel.min.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
+
+    {% block script %}{% endblock %}
 </body>
 
 </html>

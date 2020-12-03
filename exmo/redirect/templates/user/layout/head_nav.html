@@ -16,7 +16,7 @@
             </div>
             <div class="ht-right">
                 
-                        <a href="./login.php" class="login-panel"><i class="fa fa-user"></i>Đăng nhập</a>
+                        <a href="{% url 'redirect:Login' %}" class="login-panel"><i class="fa fa-user"></i>Đăng nhập</a>
                     
                 <div class="lan-selector">
                     <select class="language_drop" name="countries" id="countries" style="width:300px;">
@@ -40,7 +40,7 @@
             <div class="row">
                 <div class="col-lg-2 col-md-2">
                     <div class="logo">
-                        <a href="./index.php">
+                        <a href="{% url 'redirect:Index' %}">
                             <h2 style="color: black; font-weight: Bold;">EXMO</h2>
                         </a>
                     </div>
@@ -58,7 +58,7 @@
                     <div class="col-lg-3 text-right col-lg-3">
                         <ul class="nav-right">
                                     <span><b>Giỏ hàng</b></span>
-                            <li class="cart-icon"><a href="shopping-cart.php">
+                            <li class="cart-icon"><a href="{% url 'redirect:ShoppingCart' %}">
                                     <i class="icon_cart_alt"></i>
                                     <span>2</span>
                                     <div class="cart-hover">
@@ -112,14 +112,15 @@
             </div>
             <nav class="nav-menu mobile-menu">
                 <ul>
-                    <li><a href="./index.php">Trang chủ</a></li>
-                    <li><a href="./shop.php">Shop</a></li>
-                    <li><a href="./contact.php">Địa chỉ</a></li>
+                    <li><a href="{% url 'redirect:Index' %}">Trang chủ</a></li>
+                    <li><a href="{% url 'redirect:Shop' %}">Shop</a></li>
+                    <li><a href="{% url 'redirect:Contact' %}">Địa chỉ</a></li>
                     <li><a href="#">Pages</a>
                         <ul class="dropdown">
-                            <li><a href="./shopping-cart.php">Giỏ hàng</a></li>
-                            <li><a href="./register.php">Đăng ký</a></li>
-                            <li><a href="./login.php">Đăng nhập</a></li>
+                            <li><a href="{% url 'redirect:ShoppingCart' %}">Giỏ hàng</a></li>
+                            <li><a href="{% url 'redirect:Register' %}">Đăng ký</a></li>
+                            <li><a href="{% url 'redirect:Login' %}">Đăng nhập</a></li>
+                            <li><a href="{% url 'redirect:Login' %}">Đăng xuất</a></li>
                         </ul>
                     </li>
                 </ul>

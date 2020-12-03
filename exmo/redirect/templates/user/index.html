@@ -38,54 +38,61 @@
     </div>
     <!-- Banner Section End -->
 
-    <!-- Women Banner Section Begin -->
-    <section class="women-banner spad">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="product-large set-bg" data-setbg="{% static 'img/baoda2.jpg' %}">
-                        <h2>Bao da - Ốp lưng</h2>
-                        <a href="#">Xem nhiều sản phẩm khác</a>
+    <!-- Women Banner Section Begin -->{{ nhomHangHoaArr }}<br>{{hangHoaArr}}
+    {% for item in nhomHangHoaArr %}
+        <section class="women-banner spad">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="product-large set-bg" data-setbg="{% static 'img/exmo.jpg' %}" style="opacity: 0.9;">
+                            <!-- {% static 'img/baoda2.jpg' %} -->
+                            <h2>{{ item.ten }}</h2>
+                            <a href="#">Xem nhiều sản phẩm khác</a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-8 offset-lg-1">
-                    <div class="filter-control">
-                        <ul>
-                            <li class="active">Bao da - Ốp lưng cao cấp</li>
-                        </ul>
-                    </div>
-                    <div class="product-slider owl-carousel">
-                            <div class="product-item">
-                                <div class="pi-pic">
-                                    <img src="{% static 'img/baoda1.jpg' %}" alt="">
-                                    <!-- <div class="icon">
-                                        <i class="icon_heart_alt"></i>
-                                    </div> -->
-                                    <ul>
-                                        <!-- <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li> -->
-                                        <li class="quick-view"><a href="product.php">+ Xem nhanh</a></li>
-                                        <!-- <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li> -->
-                                    </ul>
-                                </div>
-                                <div class="pi-text">
-                                    <div class="catagory-name">Ốp lưng</div>
-                                    <a href="#">
-                                        <h5>Ốp lưng Spigen Ultra Hybrid Iphone 12</h5>
-                                    </a>
-                                    <div class="product-price">
-                                    540.000 vnd
-                                    </div>
-                                </div>
-                            </div>    
-                                     
+                    <div class="col-lg-8 offset-lg-1">
+                        <div class="filter-control">
+                            <ul>
+                                <li class="active">{{ item.ten }}</li>
+                            </ul>
+                        </div>
+                        <div class="product-slider owl-carousel">
+                            {% for product in hangHoaArr %}
+                                {{item.manhom}}, {{ product.manhom.manhom }}, {{ product.mahh }}, {{product.ten}}, {{product.gia}}
+                                {% if product.manhom == item.manhom %}
+                                    <div class="product-item">
+                                        <div class="pi-pic">
+                                            <img src="http://localhost:8000{{ product.hinhanh }}" alt="">
+                                            <div class="icon">
+                                                <i class="icon_heart_alt"></i>
+                                            </div>
+                                            <ul>
+                                                <!-- <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li> -->
+                                                <li class="quick-view"><a href="{% url 'redirect:Product' product.mahh %}">+ Xem nhanh</a></li>
+                                                <!-- <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li> -->
+                                            </ul>
+                                        </div>
+                                        <div class="pi-text">
+                                            <div class="catagory-name">{{ item.ten }}</div>
+                                            <a href="#">
+                                                <h5>{{ product.ten }}</h5>
+                                            </a>
+                                            <div class="product-price">
+                                            {{ product.gia }} vnd
+                                            </div>
+                                        </div>
+                                    </div>    
+                                {% endif %}
+                            {% endfor %}                     
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    {% endfor %}
     <!-- Women Banner Section End -->
     <!-- Man Banner Section Begin -->
-    <section class="man-banner spad">
+    <!-- <section class="man-banner spad">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-8">
@@ -129,10 +136,10 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
     <!-- Man Banner Section End -->
     <!-- kids Banner Section Begin -->
-    <section class="women-banner spad">
+    <!-- <section class="women-banner spad">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-3">
@@ -176,6 +183,11 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
     <!-- kids Banner Section End -->
+{% endblock %}
+
+{% block script %}
+    <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="{% static 'user/js/index.js' %}"></script> -->
 {% endblock %}
