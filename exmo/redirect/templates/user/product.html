@@ -37,65 +37,66 @@
                 </div>
                 <div class="col-lg-9">
                     <div class="row">
-                       
-                                    <div class="col-lg-6">
-                                        <div class="" >
-                                            <img class="product-big-img"style="width:400px; height:400px;" src="./../media/{{hangHoa.hinhanh }}" alt="">
-                                                <div class="zoom-icon">
-                                                    
-                                                    </div>
+                        <div class="col-lg-6">
+                            <div class="" >
+                                <img class="product-big-img"style="width:400px; height:400px;" src="./../media/{{hangHoa.hinhanh }}" alt="">
+                                <div class="zoom-icon"></div>
+                            </div>
+                            <div class="product-thumbs">
+                                <div class="product-thumbs-track ps-slider owl-carousel"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="product-details">
+                                <div class="pd-title">
+                                    <span>{{ nhomHangHoa.ten }}</span>
+                                    <h3>{{ hangHoa.ten }}</h3>
+                                    <a href="#" class="heart-icon"><i class="icon_heart_alt"></i></a>
+                                </div>
+                                <div class="pd-rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star-o"></i>
+                                    <span>(5)</span>
+                                </div>
+                                <div class="pd-desc">
+                                    <p>{{ hangHoa.mota }}</p>
+                                    <h4> {{ hangHoa.gia }} vnd</h4>
+                                </div>
+                                <div class="quantity">
+                                    <form> 
+                                        <div class="pro-qty">
+                                            <input type="text" value="1" name="soluong" id="soluong">
                                         </div>
-                                        <div class="product-thumbs">
-                                            <div class="product-thumbs-track ps-slider owl-carousel">        
-                                            </div>
-                                        </div>
+                                        <button type="button" style="border: none;" name="smit" class="primary-btn pd-cart" id="addCartBtn">Thêm giỏ hàng</button>
+                                    </form>
+                                </div>
+                                <ul class="pd-tags">
+                                    <li><span>Thể loại</span>: {{ nhomHangHoa.ten }}</li>
+                                </ul>
+                                <div class="pd-share">
+                                    <div class="p-code">Mã : 
+                                        <span id="maHangHoa">{{ hangHoa.mahh }}</span>
+                                    </div></br>
+                                    <div class="p-code">Số lượng còn lại :<span id="soluongconlai">{{ hangHoa.soluong }}</span></div>
+                                    <div class="pd-social">
+                                        <a href="#"><i class="ti-facebook"></i></a>
+                                        <a href="#"><i class="ti-twitter-alt"></i></a>
+                                        <a href="#"><i class="ti-linkedin"></i></a>
                                     </div>
-                                    <div class="col-lg-6">
-                                        <div class="product-details">
-                                            <div class="pd-title">
-                                                <span>{{ nhomHangHoa.ten }}</span>
-                                                <h3>{{ hangHoa.ten }}</h3>
-                                                <a href="#" class="heart-icon"><i class="icon_heart_alt"></i></a>
-                                            </div>
-                                            <div class="pd-rating">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star-o"></i>
-                                                <span>(5)</span>
-                                            </div>
-                                            <div class="pd-desc">
-                                                <p>{{ hangHoa.mota }}</p>
-                                                <h4> {{ hangHoa.gia }} vnd</h4>
-                                            </div>
-                                            <div class="quantity">
-                                                <form action="#" method="post"> 
-                                                    <div class="pro-qty">
-                                                        <input type="text" value="1" name="soluong" >
-                                                    </div>
-                                                    <button type="submit"style="border: none;"name="smit" class="primary-btn pd-cart" >Thêm giỏ hàng</button>
-                                                </form>    
-                                            </div>
-                                            <ul class="pd-tags">
-                                                <li><span>Thể loại</span>: {{ nhomHangHoa.ten }}</li>
-                                            </ul>
-                                            <div class="pd-share">
-                                                <div class="p-code">Mã : {{ hangHoa.mahh }}</div></br>
-                                                <div class="p-code">Số lượng còn lại :<span id="soluongconlai">{{ hangHoa.soluong }}</span></div>
-                                                <div class="pd-social">
-                                                    <a href="#"><i class="ti-facebook"></i></a>
-                                                    <a href="#"><i class="ti-twitter-alt"></i></a>
-                                                    <a href="#"><i class="ti-linkedin"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>    
-                         
+                                </div>
+                            </div>
+                        </div>    
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <!-- Product Shop Section End -->
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'user/js/product.js' %}"></script>
 {% endblock %}

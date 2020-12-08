@@ -6,4 +6,4 @@ class DonHangSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Donhang
-        fields = ['madh', 'thoigiandathang', 'trangthai', 'manv', 'makh']
+        fields = ['madh', 'thoigiandathang', 'trangthai', 'manv', 'makh', 'hoten', 'diachi', 'sodienthoai']

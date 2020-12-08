@@ -10,6 +10,9 @@ class Donhang(models.Model):
     trangthai = models.IntegerField(db_column='TrangThai', blank=True, null=True, default=0)
     manv = models.ForeignKey('TaiKhoan.Taikhoan', models.DO_NOTHING, db_column='MaNV', related_name='manv')
     makh = models.ForeignKey('TaiKhoan.Taikhoan', models.DO_NOTHING, db_column='MaKH', related_name='makh')
+    hoten = models.CharField(db_column='HoTen', max_length=70, blank=False, null=False)
+    diachi = models.CharField(db_column='DiaChi', max_length=200, blank=False, null=False)
+    sodienthoai = models.CharField(db_column='SoDienThoai', max_length=15, blank=False, null=False)
 
     class Meta:
         managed = False

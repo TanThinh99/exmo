@@ -11,8 +11,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text product-more">
-                        <a href="index.php"><i class="fa fa-home"></i> Trang chủ</a>
-                        <a href="shop.php">Cửa hàng</a>
+                        <a href="{% url 'redirect:Index' %}"><i class="fa fa-home"></i> Trang chủ</a>
+                        <a href="{% url 'redirect:Shop' %}">Cửa hàng</a>
                         <span>Giỏ hàng</span>
                     </div>
                 </div>
@@ -39,27 +39,27 @@
                                     <th><i class="ti-close"></i></th>
                                 </tr>
                             </thead>
-                            <tbody>
-                              
-                                    
-                                            <form action="#" method="post">
-                                                <tr>
-                                                    <td style="width: 60px;" class="qua-col first-row">
-                                                        <input style="width: 40px; border:none; text-align:center;"type="text" name="dem" value=""readonly>
-                                                    </td>
-                                                    <td class="cart-pic first-row"><img style="width: 100px; height: 100px;" src="img/baoda1.jpg" alt=""></td>
-                                                    <td class="cart-title first-row" style="padding-left: 60px;">
-                                                        <h5>Ốp lưng Spigen Ultra Hybrid Iphone 12</h5>
-                                                    </td>
-                                                    <td style="width: 60px;" class="qua-col first-row">
-                                                        <input style="width: 40px; border:none; text-align:center;"type="text" value="2"readonly>
-                                                    </td>
-                                                    <td class="p-price first-row"> 540.000 vnd</td>
-                                                    <td class="total-price first-row"> 540.000 vnd</td>
-                                                    <td class=""><button type="submit"style="border: none; margin-top: 1.4rem;"name="smit" class="ti-close"></button></td>
-                                                </tr>
-                                            </form>
-                               
+                            <tbody>  
+                                {% for stt, item, amount, money in bill %}
+                                    <tr>
+                                        <td style="width: 60px;" class="qua-col first-row">
+                                            <input style="width: 40px; border:none; text-align:center;" type="text" name="dem" value="{{ stt }}" readonly>
+                                        </td>
+                                        <td class="cart-pic first-row"><img style="width: 100px; height: 100px;" src="./../media/{{ item.hinhanh }}" alt=""></td>
+                                        <td class="cart-title first-row" style="padding-left: 60px;">
+                                            <h5>{{ item.ten }}</h5>
+                                        </td>
+                                        <td style="width: 60px;" class="qua-col first-row">
+                                            <input style="width: 40px; border:none; text-align:center;" type="text" id="amo{{ stt }}" value="{{ amount }}" readonly>
+                                        </td>
+                                        <td class="p-price first-row"> {{ item.gia }} vnd</td>
+                                        <td class="total-price first-row"> {{ money }} vnd</td>
+                                        <td class=""><button onclick="DeleteProduct('{{item.mahh}}')" style="border: none; margin-top: 1.4rem;" name="smit" class="ti-close"></button></td>
+                                    </tr>
+                                    <input type="hidden" id="mahh{{ stt }}" value="{{ item.mahh }}">
+                                    <input type="hidden" id="gia{{ stt }}" value="{{ item.gia }}">
+                                {% endfor %}
+                                <input type="hidden" id="amountOfProduct" value="{{ amountOfProduct }}">
                             </tbody>
                         </table>
                     </div>
@@ -73,19 +73,59 @@
                         <div class="col-lg-4 offset-lg-4">
                             <div class="proceed-checkout">
                                 <ul>
-                                    <li class="subtotal">Tổng thanh toán <span> 1.080.000 vnd</span></li>
-                                    <!-- <li class="cart-total">Thanh toán <span>380.000 vnd</span></li> -->
-                                </ul>     
-                                            <form action="#" method="post">
-                                                <button name="smittotal" type="submit" class="proceed-btn">Thanh toán</button>
-                                            </form>
+                                    <li class="subtotal">Tổng thanh toán <span> {{ moneyTotal }} vnd</span></li>
+                                </ul>
                             </div>
-                        </div>';
-                        
+                        </div>                        
+                    </div>
+                    <div class="login-form" style="width:70%; margin:auto;">
+                        <form> 
+                            <div class="group-input">
+                                <label for="name">Vui lòng nhập họ tên *</label>
+                                <input name="name" type="text" id="name"
+                                    {% if nameOfUser != '' %}
+                                        value='{{ user.hoten }}'
+                                    {% endif %}
+                                >
+                                <p id="nameError" style="display:none; color:red">Họ tên không được trống</p>
+                            </div>
+                            <div class="group-input">
+                                <label for="address">Địa chỉ giao hàng *</label>
+                                <input type="text" name="address" id="address"
+                                    {% if nameOfUser != '' %}
+                                        value='{{ user.diachi }}'
+                                    {% endif %}
+                                >
+                                <p id="addressError" style="display:none; color:red">Địa chỉ không được trống</p>
+                            </div>
+                            <div class="group-input">
+                                <label for="address">Số điện thoại *</label>
+                                <input type="text" name="phone" id="phone"
+                                    {% if nameOfUser != '' %}
+                                        value='{{ user.sodienthoai }}'
+                                    {% endif %}
+                                >
+                                <p id="phoneError" style="display:none; color:red">Số điện thoại không được trống, có 10 đến 11 số</p>
+                            </div>
+                            <button name="smittotal" type="button" class="proceed-btn" id="submitBtn" 
+                                style="color: white; background-color: #2f2f2f; padding: 11px 25px; font-weight: bold;">
+                                Thanh toán
+                            </button>
+                        </form>
+                        <input type="hidden" id="logged"
+                            {% if nameOfUser != '' %}
+                                value='1'
+                            {% endif %}
+                        >
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <!-- Shopping Cart Section End -->
+{% endblock %}
+
+{% block script %}
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="{% static 'user/js/shopping-cart.js' %}"></script>
 {% endblock %}

@@ -19,4 +19,11 @@ urlpatterns = [
     # AJAX
     path('saveAccess', views.SaveAccess, name='Save_access'),
     path('getAccess', views.GetAccess, name='Get_access'),
+
+        # Cart
+    path('product/addCart', views.AddCart, name="Add_cart"),
+    path('deleteProduct', views.DeleteProductFromCart, name='Delete_product_from_cart'),
+    path('deleteCart', views.DeleteCart, name='Delete_cart'),
+
+    path('TestSessionForCart', views.TestSessionForCart),
 ]

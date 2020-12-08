@@ -26,9 +26,13 @@ class DonHangCreate(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request, format=None):
+        data = request.data
         donHang = Donhang(
             makh = request.user,
-            manv = Taikhoan.objects.get(pk=3)
+            manv = Taikhoan.objects.get(pk=3),
+            hoten = data.get('hoten'),
+            diachi = data.get('diachi'),
+            sodienthoai = data.get('sodienthoai')
         )
         donHang.save()
         serializer = DonHangSerializer(donHang)
