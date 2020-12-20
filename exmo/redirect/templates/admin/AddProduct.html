@@ -1,0 +1,131 @@
+{% extends 'admin/layout/base.html' %}
+
+{% block title %}
+    Thêm hàng hóa
+{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Thêm hàng hóa</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Admin</a></li>
+                        <li class="breadcrumb-item"><a href="#">Thêm hàng hóa<a href=""></a></a></li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <style>
+                body{
+                    font-size: 12px!important;
+                }
+            </style>
+            <div id="content" class=" bg-white " > 
+                <div class="breacrumb-section bg-light">  
+                    <form style="width: 80%; margin-left:40px; padding-top:40px;">
+                        <div class="form-row ">
+                            <div class="form-group col-md-6">
+                                <label for="inputEmail4">Nhóm hàng hóa</label>
+                                <select style="width:14rem;" id="nhomHH" name="sex" class="form-control pull-right">
+                                    {% for group in groupList %}
+                                        <option value="{{ group.manhom }}">{{ group.ten }}</option>
+                                        <!-- <option value="0">Member</option> -->
+                                    {% endfor %}
+                                </select>
+                                <!-- <input name="manhom" type="text" class="form-control" id="inputEmail4" placeholder="Nhóm hàng hóa"> -->
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputPassword4">Tên hàng hóa</label>
+                                <input name="ten" type="text" class="form-control" id="tenHH" placeholder="Tên hàng hóa">
+                            </div>
+                        </div>
+                        <div class="form-row ">
+                            <div class="form-group col-md-6">
+                                <label for="inputEmail4">Giá</label>
+                                <input name="gia" type="number" min="0" class="form-control" id="giaHH" placeholder="Giá hàng hóa">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputPassword4">Số lượng</label>
+                                <input name="soluong" type="number" min="0" class="form-control" id="soLuongHH" placeholder="Số lượng">
+                            </div>
+                        </div>
+                        <div class="form-row ">
+                            <div class="form-group col-md-6">
+                                <label for="inputPassword4">Hình ảnh</label>
+                                <input style="border: none;" name="hinh" type="file" class="form-control" id="hinhAnhHH">
+                            </div>
+                        </div>
+                        <div class="form-row form-group" style="padding-left:4px;">
+                            <label for="inputAddress2">Mô tả</label>
+                            <input name="mota" type="text" class="form-control" id="moTaHH" placeholder="Mô tả">
+                        </div>
+                        <button style="margin-left: 45%;" type="button" name="submitthem" id="themHHBtn" class="btn btn-primary">Thêm hàng hóa</button>
+                    </form>
+                </div>
+            </div>
+
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+{% endblock %}
+
+{% block script %}
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        document.getElementById('addProductSideBar').classList.add('active');
+        document.getElementById('themHHBtn').onclick = function() {
+            $.get('getAccess', function(data) {
+                var access = data;
+                if(access == "")
+                {
+                    window.location.href = "http://localhost:8000/";
+                }
+                var hinhAnh = document.getElementById('hinhAnhHH').files[0];
+                var ten = document.getElementById('tenHH').value;
+                var moTa = document.getElementById('moTaHH').value;
+                var gia = document.getElementById('giaHH').value *1;
+                var soLuong = document.getElementById('soLuongHH').value *1;
+                var maNhom = document.getElementById('nhomHH').value *1;
+
+                var formData = new FormData();
+                if(hinhAnh != undefined)
+                {
+                    formData.append('hinhanh', hinhAnh);
+                }
+                formData.append('ten', ten);
+                formData.append('mota', moTa);
+                formData.append('gia', gia);
+                formData.append('soluong', soLuong);
+                formData.append('manhom', maNhom);  
+
+                axios({
+                    method: 'POST',
+                    url: 'http://localhost:8000/hanghoa/create',
+                    data: formData,
+                    headers: {
+                        "Authorization": "Bearer "+ access
+                    }
+                })
+                .then(function(data) {
+                    alert('Tạo hàng hóa thành công');
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
+            });
+        }
+    </script>
+{% endblock %}

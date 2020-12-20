@@ -10,6 +10,11 @@ class IsAdmin(BasePermission):
         user = Taikhoan.objects.get(username=username)
         return user.isadmin
 
+    def has_object_permission(self, request, view, obj):
+        username = str(request.user)
+        user = Taikhoan.objects.get(username=username)
+        return user.isadmin
+
 
 class IsAdminOrOwnerUser(BasePermission):
 

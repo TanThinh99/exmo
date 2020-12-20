@@ -1,10 +1,15 @@
 from django.shortcuts import render, redirect
+from django.http import Http404
 
 from NhomHangHoa.serializers import NhomHangHoaSerializer
 from NhomHangHoa.models import Nhomhanghoa
 
 from HangHoa.serializers import HangHoaSerializer
 from HangHoa.models import Hanghoa
+
+from DonHang.models import Donhang
+
+from ChiTietDonHang.models import Chitietdonhang
 
 from TaiKhoan.models import Taikhoan
 
@@ -124,6 +129,7 @@ def ShoppingCart(request):
     sttArr = []
     productArr = []
     amountArr = []
+    moneyProduct = []
     moneyArr = []
     moneyTotal = 0
     for i in range(0, count):
@@ -133,6 +139,9 @@ def ShoppingCart(request):
             # product
         prID = request.session['pr'+i]
         hangHoa = Hanghoa.objects.get(pk=prID)
+            # product money
+        productArr.append(hangHoa)
+        moneyProduct.append(ShowMoney(str(hangHoa.gia)))
             # amount
         amount = request.session['amo'+i]
         amountArr.append(amount)
@@ -141,10 +150,8 @@ def ShoppingCart(request):
         moneyArr.append(ShowMoney(str(money)))
             # moneyTotal
         moneyTotal += money
-            # product money
-        hangHoa.gia = ShowMoney(str(hangHoa.gia))
-        productArr.append(hangHoa)
-    bill = zip(sttArr, productArr, amountArr, moneyArr)
+            
+    bill = zip(sttArr, productArr, amountArr, moneyProduct, moneyArr)
 
     data = {
         'nameOfUser': name,
@@ -167,7 +174,7 @@ def ShowMoney(money):
     return money
 
 
-    #============================== AJAX =====================================#
+#============================== AJAX =====================================#
 def SaveAccess(request):
     username = request.GET.get('username')
     access = request.GET.get('access')
@@ -180,7 +187,7 @@ def GetAccess(request):
     try:
         access = request.session['access']
     except KeyError:
-        return redirect('http://localhost:8000/')
+        access = ""
     return render(request, "user/accessUserAjax.html", {'access': access})
 
 
@@ -269,3 +276,74 @@ def TestSessionForCart(request):
     #     del request.session['pr'+str(i)]
     #     del request.session['amo'+str(i)]
     # del request.session['count']
+
+
+# ========== ADMIN =============
+def AccountList(request):
+    CheckAdmin(request)
+    accountList = Taikhoan.objects.all()
+    data = {
+        'accountList': accountList
+    }
+    return render(request, 'admin/account.html', data)
+
+
+def DealList(request):
+    CheckAdmin(request)
+    dealNotPass = Donhang.objects.filter(trangthai=0).order_by('-madh')
+    dealPass = Donhang.objects.filter(trangthai=1).order_by('-madh')
+    detailList = Chitietdonhang.objects.all()
+    for detail in detailList:
+        money = detail.giadathang * detail.soluong
+        detail.giadathang = ShowMoney(str(money))
+    data = {
+        'dealNotPass': dealNotPass,
+        'dealPass': dealPass,
+        'detailList': detailList
+    }
+    return render(request, 'admin/PassDeal.html', data)
+
+
+def ProductList(request):
+    CheckAdmin(request)
+    productList = Hanghoa.objects.all()
+    for pro in productList:
+        pro.gia = ShowMoney(str(pro.gia))
+    data = {
+        'productList': productList
+    }
+    return render(request, 'admin/ProductList.html', data)
+
+
+def AddProduct(request):
+    CheckAdmin(request)
+    groupList = Nhomhanghoa.objects.all()
+    data = {
+        'groupList': groupList
+    }
+    return render(request, 'admin/AddProduct.html', data)
+
+
+def GroupList(request):
+    CheckAdmin(request)
+    groupList = Nhomhanghoa.objects.all()
+    data = {
+        'groupList': groupList
+    }
+    return render(request, 'admin/GroupList.html', data)
+
+
+def AddGroup(request):
+    CheckAdmin(request)
+    return render(request, 'admin/AddGroup.html')
+
+
+def CheckAdmin(request):
+    try:
+        username = request.session['username']    
+    except KeyError:
+        raise Http404()
+    user = Taikhoan.objects.get(username=username)
+    if user.isadmin == 0:
+        raise Http404()
+    

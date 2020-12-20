@@ -40,51 +40,53 @@
 
     <!-- Women Banner Section Begin -->
     {% for item in nhomHangHoaArr %}
-        <section class="women-banner spad">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-3">
-                        <div class="product-large set-bg" data-setbg="{% static 'img/exmo.jpg' %}" style="opacity: 0.9;">
-                            <h2>{{ item.ten }}</h2>
-                            <a href="#">Xem nhiều sản phẩm khác</a>
+        {% if item.hanghoa_set.all.count > 0 %}
+            <section class="women-banner spad">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="product-large set-bg" data-setbg="{% static 'img/exmo.jpg' %}" style="opacity: 0.9;">
+                                <h2>{{ item.ten }}</h2>
+                                <a href="#">Xem nhiều sản phẩm khác</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-8 offset-lg-1">
-                        <div class="filter-control">
-                            <ul>
-                                <li class="active">{{ item.ten }}</li>
-                            </ul>
-                        </div>
-                        <div class="product-slider owl-carousel">
-                            {% for product in hangHoaArr %}
-                                {% if product.manhom.manhom == item.manhom %}
-                                    <div class="product-item">
-                                        <div class="pi-pic">
-                                            <img src="http://localhost:8000/media/{{ product.hinhanh }}" alt="">
-                                            <div class="icon">
-                                                <i class="icon_heart_alt"></i>
+                        <div class="col-lg-8 offset-lg-1">
+                            <div class="filter-control">
+                                <ul>
+                                    <li class="active">{{ item.ten }}</li>
+                                </ul>
+                            </div>
+                            <div class="product-slider owl-carousel">
+                                {% for product in hangHoaArr %}
+                                    {% if product.manhom.manhom == item.manhom %}
+                                        <div class="product-item">
+                                            <div class="pi-pic">
+                                                <img src="http://localhost:8000/media/{{ product.hinhanh }}" alt="">
+                                                <div class="icon">
+                                                    <i class="icon_heart_alt"></i>
+                                                </div>
+                                                <ul>
+                                                    <li class="quick-view"><a href="{% url 'redirect:Product' product.mahh %}">+ Xem nhanh</a></li>
+                                                </ul>
                                             </div>
-                                            <ul>
-                                                <li class="quick-view"><a href="{% url 'redirect:Product' product.mahh %}">+ Xem nhanh</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="pi-text">
-                                            <div class="catagory-name">{{ item.ten }}</div>
-                                            <a href="#">
-                                                <h5>{{ product.ten }}</h5>
-                                            </a>
-                                            <div class="product-price">
-                                            {{ product.gia }} vnd
+                                            <div class="pi-text">
+                                                <div class="catagory-name">{{ item.ten }}</div>
+                                                <a href="#">
+                                                    <h5>{{ product.ten }}</h5>
+                                                </a>
+                                                <div class="product-price">
+                                                {{ product.gia }} vnd
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>    
-                                {% endif %}
-                            {% endfor %}                     
+                                        </div>    
+                                    {% endif %}
+                                {% endfor %}                     
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        {% endif %}
     {% endfor %}
 {% endblock %}
 

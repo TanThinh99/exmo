@@ -40,7 +40,7 @@
                                 </tr>
                             </thead>
                             <tbody>  
-                                {% for stt, item, amount, money in bill %}
+                                {% for stt, item, amount, moneyProduct, money in bill %}
                                     <tr>
                                         <td style="width: 60px;" class="qua-col first-row">
                                             <input style="width: 40px; border:none; text-align:center;" type="text" name="dem" value="{{ stt }}" readonly>
@@ -52,7 +52,7 @@
                                         <td style="width: 60px;" class="qua-col first-row">
                                             <input style="width: 40px; border:none; text-align:center;" type="text" id="amo{{ stt }}" value="{{ amount }}" readonly>
                                         </td>
-                                        <td class="p-price first-row"> {{ item.gia }} vnd</td>
+                                        <td class="p-price first-row"> {{ moneyProduct }} vnd</td>
                                         <td class="total-price first-row"> {{ money }} vnd</td>
                                         <td class=""><button onclick="DeleteProduct('{{item.mahh}}')" style="border: none; margin-top: 1.4rem;" name="smit" class="ti-close"></button></td>
                                     </tr>
@@ -66,7 +66,7 @@
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="cart-buttons">
-                                <a href="{% url 'redirect:Shop' %}" class="primary-btn continue-shop">Mua thêm</a>
+                                <a href="{% url 'redirect:Index' %}" class="primary-btn continue-shop">Mua thêm</a>
                             </div>
                         </div>
                      

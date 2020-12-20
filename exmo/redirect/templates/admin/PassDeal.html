@@ -1,0 +1,142 @@
+{% extends 'admin/layout/base.html' %}
+
+{% block title %}
+    Quản lý đơn hàng
+{% endblock %}
+
+{% load static %}
+
+{% block content %}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Duyệt đơn hàng</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Admin</a></li>
+                        <li class="breadcrumb-item"><a href="#">Duyệt đơn hàng</a></li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <style>
+                body{
+                    font-size: 12px!important;
+                }
+            </style>
+            <div id="content" class=" bg-white " > 
+                    <div class="breacrumb-section bg-light">
+                        
+                    <div class="cart-table">
+                                    <table style="width: 100%; ">
+                                        <thead >
+                                            <tr>
+                                                <th style="width: 150px;">Số đơn hàng</th>
+                                                <th>Ảnh sản phẩm</th>
+                                                <th class="p-name" style="padding-left: 60px;">Tên sản phẩm</th>
+                                                <th>Số lượng</th>
+                                                <th>Giá <b>X</b> Số lượng</th>
+                                              
+                                            </tr>
+                                        </thead>
+                                        <tbody>                                            
+                                            {% for dh in dealNotPass %}
+                                                {% for detail in detailList %}
+                                                    {% if detail.madh.madh == dh.madh %}
+                                                        <tr>
+                                                            <td style="width: 60px;" class="qua-col first-row">
+                                                                {{ dh.madh }}
+                                                            </td>
+                                                            <td class="cart-pic first-row"><img style="width: 100px; height: 100px;" src="http://localhost:8000/media/{{ detail.mahh.hinhanh }}" alt=""></td>
+                                                            <td class="cart-title first-row" style="padding-left: 60px;">
+                                                                <h5>{{ detail.mahh.ten }}</h5>
+                                                            </td>
+                                                            <td style="width: 60px;" class="qua-col first-row">
+                                                                {{ detail.soluong }}
+                                                            </td>
+                                                            <td class="p-price first-row">{{ detail.giadathang }} vnd </td>
+                                                        </tr>
+                                                    {% endif %}
+                                                {% endfor %}
+                                                <tr style="border-bottom: 2px solid black; margin: 10px auto 10px auto"> <td colspan="5"> <button type="button" style="border-radius: 6px; border: 1px solid black;margin-left: 45%;" name="duyetDH"class="" onclick="PassDeal('{{ dh.madh }}')">Duyệt Đơn hàng</button><td></tr>
+                                            {% endfor %}
+
+                                            {% for dh in dealPass %}
+                                                {% for detail in detailList %}
+                                                    {% if detail.madh.madh == dh.madh %}
+                                                        <tr>
+                                                            <td style="width: 60px;" class="qua-col first-row">
+                                                                {{ dh.madh }}
+                                                            </td>
+                                                            <td class="cart-pic first-row"><img style="width: 100px; height: 100px;" src="http://localhost:8000/media/{{ detail.mahh.hinhanh }}" alt=""></td>
+                                                            <td class="cart-title first-row" style="padding-left: 60px;">
+                                                                <h5>{{ detail.mahh.ten }}</h5>
+                                                            </td>
+                                                            <td style="width: 60px;" class="qua-col first-row">
+                                                                {{ detail.soluong }}
+                                                            </td>
+                                                            <td class="p-price first-row">{{ detail.giadathang }} vnd </td>
+                                                        </tr>
+                                                    {% endif %}
+                                                {% endfor %}
+                                                <tr style="border-bottom: 2px solid black; margin: 10px auto 10px auto">
+                                                    <td colspan="5"></td>
+                                                </tr>                                                
+                                            {% endfor %}
+                                    </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>
+{% endblock %}
+
+{% block script %}
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        document.getElementById('PassDealSideBar').classList.add('active');
+        function PassDeal(donHangId)
+        {
+            if(confirm('Bạn sẽ duyệt đơn hàng này?'))
+            {
+                $.get('getAccess', function(data) {
+                    var access = data;
+                    if(access == "")
+                    {
+                        window.location.href = "http://localhost:8000/";
+                    }
+                    axios({
+                        method: 'PUT',
+                        url: 'http://localhost:8000/donhang/pass/'+ donHangId,
+                        headers: {
+                            'Authorization': 'Bearer '+ access
+                        }
+                    })
+                    .then(function(data) {
+                        alert('Duyệt đơn hàng thành công');
+                        location.reload();
+                    })
+                    .catch(function(error) {
+                        alert('Duyệt đơn hàng không thành công. Có thể trong kho không đủ hàng');
+                        console.log(error);
+                    });
+                });
+            }
+        }        
+    </script>
+{% endblock %}

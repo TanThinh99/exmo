@@ -1,0 +1,83 @@
+{% extends 'admin/layout/base.html' %}
+
+{% block title %}
+    Thêm nhóm hàng hóa
+{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Thêm nhóm hàng hóa</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Admin</a></li>
+                        <li class="breadcrumb-item"><a href="#">Thêm nhóm hàng hóa</a></li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+        <style>
+            body{
+                font-size: 12px!important;
+            }
+        </style>
+        <div class="row">
+            <div class="col-sm-6 m-auto">
+                <div class="form-group">
+                    <label for="code" class="control-label">Tên nhóm hàng hóa</label>
+                    <input type="text" class="form-control" id="tenNhom" name="fullname" placeholder="">
+                </div>
+                
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary" id="submitBtn">Save</button>
+                    <a onclick="document.getElementById('tenNhom').value='';" class="btn btn-default">Reset</a>
+                </div>
+            </div>
+        </div>    
+    </section>
+    <!-- /.content -->
+</div>
+{% endblock %}
+
+{% block script %}
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        document.getElementById('addGroupSideBar').classList.add('active');
+        document.getElementById('submitBtn').onclick = function() {
+            $.get('getAccess', function(data) {
+                var access = data;
+                if(access == "")
+                {
+                    window.location.href = "http://localhost:8000/";
+                }
+                var ten = document.getElementById('tenNhom').value;
+                axios({
+                    method: 'POST',
+                    url: 'http://localhost:8000/nhomhanghoa/create',
+                    data: {
+                        ten: ten
+                    },
+                    headers: {
+                        "Authorization": "Bearer "+ access
+                    }
+                })
+                .then(function(data) {
+                    alert('Tạo nhóm hàng hóa thành công');
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
+            });
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,136 @@
+{% extends 'admin/layout/base.html' %}
+
+{% block title %}
+    Quản lý tài khoản
+{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Tài khoản</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Admin</a></li>
+                        <li class="breadcrumb-item"><a href="#">Tài khoản</a></li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+        <style>
+            body{
+                font-size: 12px!important;
+            }
+        </style>
+            <div id="page-wrapper">
+   
+                <!-- <div class="alert alert-success" role="alert" id="showMessage">
+                    <p></p>
+                    <p class="mb-0"></p>
+                </div> -->
+                <div class="container-fluid">
+                    <div class="white-box">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="white-box">
+                                    <br>                           
+                                    <!-- <a style="width:80px" href="add_new.php" class="btn btn-success waves-effect waves-light m-r-10">Add </a> -->
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <div class="table-responsive">
+                                        <table style="font-size:12px" id="myTable" class="table table-striped dataTable no-footer">
+                                            <thead>
+                                                <tr>
+                                                    <th> ID</th>
+                                                    <th>Username</th>
+                                                    <th>Phone</th>
+                                                    <th>Type</th>
+                                                    <th>Function</th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody style="font-size: 12px">
+                                                {% for acc in accountList %}
+                                                    <tr>
+                                                        <td>{{ acc.matk }}</td>
+                                                        <td>{{ acc.username }}</td>
+                                                        <td>{{ acc.sodienthoai }}</td>
+                                                        <td>
+                                                        <select style="width:7rem;" id="type{{ acc.matk }}" name="sex" class="form-control pull-right">
+                                                            {% if acc.isadmin == 1 %}
+                                                                <option value="1" selected>Admin</option>
+                                                                <option value="0">Member</option>
+                                                            {% else %}
+                                                                <option value="1">Admin</option>
+                                                                <option value="0" selected>Member</option>
+                                                            {% endif %}
+                                                        </select>
+                                                        </td>
+                                                            <td>
+                                                                <!-- <form action="#" method="post" class="delete_form"> -->
+                                                                    <a style="cursor:pointer" onclick="GrantUser('{{ acc.matk }}')" data-toggle="" data-placement="top" title="Update">&nbsp;&nbsp;&nbsp;<i class="fa fa-pencil  "></i></a>
+                                                                
+                                                                    <!-- <button type="button" class="btn btn-sm btn-icon"  data-toggle="" data-placement="top" title="Delete"><i class="fa fa-trash-alt "></i></button> -->
+                                                                <!-- </form> -->
+                                                            </td>  
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+{% endblock %}
+
+{% block script %}
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        document.getElementById('accountListSideBar').classList.add('active');
+        function GrantUser(userID)
+        {
+            if(confirm('Bạn sẽ thay đổi quyền cho người dùng này?'))
+            {
+                $.get('getAccess', function(data) {
+                    var access = data;
+                    if(access == "")
+                    {
+                        window.location.href = "http://localhost:8000/";
+                    }
+                    var grant = document.getElementById('type'+userID).value;
+                    axios({
+                        method: 'PUT',
+                        url: 'http://localhost:8000/taikhoan/grantPermission/'+ userID,
+                        data: {
+                            isadmin: grant
+                        },
+                        headers: {
+                            'Authorization': 'Bearer '+ access
+                        }
+                    })
+                    .then(function(data) {})
+                    .catch(function(error) {
+                        console.log(error);
+                    });
+                });
+            }
+        }
+    </script>
+{% endblock %}

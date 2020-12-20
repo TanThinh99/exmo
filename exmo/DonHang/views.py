@@ -12,6 +12,8 @@ from .serializers import DonHangSerializer
 from .permissions import IsAdmin, IsAdminOrOwnerUser
 
 from TaiKhoan.models import Taikhoan
+
+from ChiTietDonHang.models import Chitietdonhang
 from ChiTietDonHang.serializers import ChitietdonhangSerializer
 
 # Create your views here.
@@ -85,3 +87,34 @@ class HasChiTietDonHang(APIView):
         chiTietList = donHang.chitietdonhang_set.all()
         serializer = ChitietdonhangSerializer(chiTietList, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class PassDonHang(APIView):
+    permission_classes = [IsAuthenticated, IsAdmin]
+
+    def get_object(self, pk):
+        try:
+            donHang = Donhang.objects.get(pk=pk)
+            self.check_object_permissions(self.request, donHang)
+            return donHang
+        except Donhang.DoesNotExist:
+            return Http404
+
+    def put(self, request, pk, format=None):
+        donHang = self.get_object(pk)
+        detailList = Chitietdonhang.objects.filter(madh=pk)
+            # Check deal
+        for detail in detailList:
+            if detail.mahh.soluong - detail.soluong < 0:
+                return Response({'error': 'Product is not enough for this deal'}, status=status.HTTP_400_BAD_REQUEST)
+        
+            # Update amount of product in storage
+        for detail in detailList:
+            pro = detail.mahh
+            pro.soluong = pro.soluong - detail.soluong
+            pro.save()
+        
+        donHang.manv = request.user
+        donHang.trangthai = 1
+        donHang.save()
+        return Response({'announ': 'Pass deal is success'}, status=status.HTTP_200_OK)
